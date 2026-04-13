@@ -1,5 +1,4 @@
-// pages/Products.js
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Zap, Wind, Droplets, Shield, Cpu, Sun, Wrench, ChevronRight,
   Sparkles, CheckCircle, ArrowRight, Search, Star, TrendingUp,
@@ -16,7 +15,6 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isVisible, setIsVisible] = useState({});
   const [showQuoteModal, setShowQuoteModal] = useState(false);
-  const [tabMenuOpen, setTabMenuOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

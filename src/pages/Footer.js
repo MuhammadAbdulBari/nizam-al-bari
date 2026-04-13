@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { 
   Building2, Phone, Mail, MapPin, Facebook, Linkedin, Twitter, 
   Instagram, Send, ChevronRight, Clock, Award, Truck, Shield,
-  ArrowUp, MessageCircle, Globe, Briefcase, Calendar, Star
+  ArrowUp, MessageCircle
 } from 'lucide-react';
 
 const Footer = () => {
@@ -289,9 +289,9 @@ const Footer = () => {
 
               {/* Legal links */}
               <div className="flex items-center gap-3 sm:gap-4">
-                <a href="#" className="text-xs text-gray-500 hover:text-gold transition-colors">Privacy Policy</a>
+                <a  className="text-xs text-gray-500 hover:text-gold transition-colors">Privacy Policy</a>
                 <span className="text-gray-700 text-xs">|</span>
-                <a href="#" className="text-xs text-gray-500 hover:text-gold transition-colors">Terms of Service</a>
+                <a  className="text-xs text-gray-500 hover:text-gold transition-colors">Terms of Service</a>
               </div>
             </div>
           </div>

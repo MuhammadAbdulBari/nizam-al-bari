@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Phone, Mail, MapPin, MessageCircle, Send, Clock, 
   Facebook, Linkedin, Twitter, Instagram, ArrowRight, CheckCircle,
-  Sparkles, Globe, Award, Users, Calendar, Star, Navigation, 
-  Headphones, Zap, Shield, Truck, Package, TrendingUp
+  Sparkles, Globe, Award, Users, Navigation, 
+  Headphones, Zap, Shield, TrendingUp
 } from 'lucide-react';
 
 const Contact = () => {
@@ -18,7 +18,7 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
   const [isVisible, setIsVisible] = useState({});
-  const mapRef = useRef(null);
+  // const mapRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

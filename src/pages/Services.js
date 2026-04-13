@@ -1,10 +1,11 @@
 // pages/Services.js
 import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
-  Truck, PackageSearch, MapPin, Headphones, TrendingUp, ShieldCheck, 
-  Clock, Building2, Zap, Phone, Mail, CheckCircle, ArrowRight, 
-  Sparkles, Globe, Users, Award, Calendar, Star, MessageCircle,
-  FileCheck, Watch, BarChart, Rocket, Layers, Target
+  Truck, PackageSearch, Headphones, TrendingUp, ShieldCheck, 
+  Clock, Building2, Phone, Mail, CheckCircle, ArrowRight, 
+  Sparkles, Users, Star, MessageCircle,
+  FileCheck, Watch, BarChart, Rocket
 } from 'lucide-react';
 
 const Services = () => {

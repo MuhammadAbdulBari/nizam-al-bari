@@ -1,7 +1,7 @@
 // pages/Contact.js
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Phone, Mail, MapPin, MessageCircle, Send, Clock, Building2, 
+  Phone, Mail, MapPin, MessageCircle, Send, Clock, 
   Facebook, Linkedin, Twitter, Instagram, ArrowRight, CheckCircle,
   Sparkles, Globe, Award, Users, Calendar, Star, Navigation, 
   Headphones, Zap, Shield, Truck, Package, TrendingUp

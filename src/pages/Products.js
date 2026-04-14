@@ -5,7 +5,7 @@ import {
   Package, Truck, Clock, Award, Grid3x3, List, X,
   Battery, Cable, Lightbulb, Fan, Droplet, FlameKindling,
   Camera, PanelTop, Hammer, Thermometer, Lock, ShoppingCart,
-  Activity
+  Activity, ChevronLeft
 } from 'lucide-react';
 
 const Products = () => {
@@ -13,6 +13,7 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState('grid');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [isVisible, setIsVisible] = useState({});
   const [showQuoteModal, setShowQuoteModal] = useState(false);
 
@@ -156,6 +157,71 @@ const Products = () => {
     item.brand.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // ── Image Modal ──
+  const ImageModal = ({ image, productName, onClose, onPrevious, onNext }) => {
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') onClose();
+        if (e.key === 'ArrowLeft') onPrevious();
+        if (e.key === 'ArrowRight') onNext();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [onClose, onPrevious, onNext]);
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm">
+        <div className="relative w-full h-full flex items-center justify-center p-4">
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all"
+          >
+            <X size={24} />
+          </button>
+
+          {/* Main image container */}
+          <div className="relative max-w-4xl w-full flex flex-col items-center">
+            {/* Image */}
+            <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
+              <img
+                src={image}
+                alt={productName}
+                className="max-h-[70vh] w-auto object-contain"
+              />
+            </div>
+
+            {/* Product name below image */}
+            <p className="text-white text-center mt-4 text-lg font-semibold">{productName}</p>
+
+            {/* Navigation buttons */}
+            <div className="flex gap-4 mt-6">
+              <button
+                onClick={onPrevious}
+                className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all"
+                title="Previous (←)"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={onNext}
+                className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition-all"
+                title="Next (→)"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+
+            {/* Keyboard hint */}
+            <p className="text-white/50 text-xs mt-4 text-center">
+              Press ESC to close • ← → to navigate
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // ── Quote Modal ──
   const QuoteModal = ({ product, onClose }) => {
     const [quoteForm, setQuoteForm] = useState({ name: '', email: '', phone: '', quantity: '', message: '' });
@@ -227,6 +293,19 @@ const Products = () => {
   };
 
   const activeCat = categories[activeTab];
+
+  // Helper function to navigate images
+  const handleImageNavigation = (direction) => {
+    const currentImages = productImages[activeTab];
+    const currentIndex = currentImages.indexOf(selectedImage);
+    if (direction === 'next') {
+      const newIndex = (currentIndex + 1) % currentImages.length;
+      setSelectedImage(currentImages[newIndex]);
+    } else {
+      const newIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+      setSelectedImage(currentImages[newIndex]);
+    }
+  };
 
   return (
     <div className="overflow-hidden">
@@ -378,8 +457,11 @@ const Products = () => {
               >
                 {viewMode === 'grid' ? (
                   <>
-                    {/* Image area */}
-                    <div className={`bg-gradient-to-r ${activeCat.gradient} relative h-32 sm:h-40 md:h-48 flex items-center justify-center overflow-hidden`}>
+                    {/* Image area — clickable to open modal */}
+                    <div 
+                      onClick={() => setSelectedImage(productImages[activeTab][idx % productImages[activeTab].length])}
+                      className={`bg-gradient-to-r ${activeCat.gradient} relative h-32 sm:h-40 md:h-48 flex items-center justify-center overflow-hidden cursor-pointer`}
+                    >
                       <img
                         src={productImages[activeTab][idx % productImages[activeTab].length]}
                         alt={item.name}
@@ -397,6 +479,10 @@ const Products = () => {
                           <span className="hidden sm:inline">Popular</span>
                         </div>
                       )}
+                      {/* Zoom indicator */}
+                      <div className="absolute bottom-2 right-2 bg-white/80 backdrop-blur text-gray-800 text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        Click to view
+                      </div>
                     </div>
 
                     {/* Content */}
@@ -522,6 +608,15 @@ const Products = () => {
       {/* Modals */}
       {selectedProduct && <QuoteModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
       {showQuoteModal && <QuoteModal product={{ name: 'Bulk Order Inquiry' }} onClose={() => setShowQuoteModal(false)} />}
+      {selectedImage && (
+        <ImageModal
+          image={selectedImage}
+          productName={filteredItems[productImages[activeTab].indexOf(selectedImage) % filteredItems.length]?.name || 'Product Image'}
+          onClose={() => setSelectedImage(null)}
+          onPrevious={() => handleImageNavigation('prev')}
+          onNext={() => handleImageNavigation('next')}
+        />
+      )}
     </div>
   );
 };

@@ -244,7 +244,7 @@ const Products = () => {
         <div className="container-custom relative z-10 text-center px-4 py-16 md:py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold/20 backdrop-blur-sm rounded-full mb-5">
             <Package className="text-gold w-4 h-4" />
-            <span className="text-gold font-semibold text-sm">Premium Quality Products</span>
+            <span className="text-gold font-semibold text-sm">Premium Quality Materials</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
             Complete MEP

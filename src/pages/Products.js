@@ -256,60 +256,49 @@ const Products = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-14 md:h-20 bg-gradient-to-t from-gray-50 to-transparent" />
       </section>
-
-{/* ── Category Nav ── */}
-<section className="sticky top-16 z-40 bg-white shadow-md">
-
-  {/* Mobile: compact icon-grid (2 rows of 4) */}
-  <div className="md:hidden px-3 py-3">
-    <div className="grid grid-cols-4 gap-2">
-      {Object.entries(categories).map(([key, cat]) => (
-        <button
-          key={key}
-          onClick={() => {
-            setActiveTab(key);
-            setSearchTerm('');
-          }}
-          className={`flex flex-col items-center gap-1 py-2 px-1 rounded-xl text-xs font-medium transition-all ${
-            activeTab === key
-              ? `bg-gradient-to-r ${cat.gradient} text-white shadow-md`
-              : 'bg-gray-100 text-gray-600'
-          }`}
-        >
-          <cat.icon size={18} />
-          <span className="leading-none text-center">
-            {cat.name}
-          </span>
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* Desktop: wrapped buttons (NO SCROLL) */}
-  <div className="hidden md:block py-3">
-    <div className="container-custom">
-      <div className="flex flex-wrap justify-center gap-2">
-        {Object.entries(categories).map(([key, cat]) => (
-          <button
-            key={key}
-            onClick={() => {
-              setActiveTab(key);
-              setSearchTerm('');
-            }}
-            className={`group flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all duration-300 ${
-              activeTab === key
-                ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg scale-105`
-                : 'bg-gray-100 text-gray-700 hover:bg-green-50 hover:scale-105'
-            }`}
-          >
-            <cat.icon size={17} />
-            {cat.fullName}
-          </button>
-        ))}
-      </div>
-    </div>
-  </div>
-
+{/* ── Category Nav ── */}       
+<section className="sticky top-16 z-40 bg-white shadow-md">         
+  {/* Mobile: compact icon-grid (2 rows of 4) */}         
+  <div className="md:hidden px-3 py-3">           
+    <div className="grid grid-cols-4 gap-2">             
+      {Object.entries(categories).map(([key, cat]) => (               
+        <button                 
+          key={key}                 
+          onClick={() => { setActiveTab(key); setSearchTerm(''); }}                 
+          className={`flex flex-col items-center gap-1 py-2 px-1 rounded-xl text-xs font-medium transition-all ${                   
+            activeTab === key                     
+              ? `bg-gradient-to-r ${cat.gradient} text-white shadow-md`                     
+              : 'bg-gray-100 text-gray-600'                 
+          }`}               
+        >                 
+          <cat.icon size={18} />                 
+          <span className="leading-none text-center">{cat.name}</span>               
+        </button>             
+      ))}           
+    </div>         
+  </div>          
+          
+  {/* Desktop: wrapped pill row (no scroll) */}         
+  <div className="hidden md:block py-3">           
+    <div className="container-custom">             
+      <div className="flex flex-wrap justify-center gap-2">               
+        {Object.entries(categories).map(([key, cat]) => (                 
+          <button                   
+            key={key}                   
+            onClick={() => { setActiveTab(key); setSearchTerm(''); }}                   
+            className={`group flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all duration-300 whitespace-nowrap ${                     
+              activeTab === key                       
+                ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg scale-105`                       
+                : 'bg-gray-100 text-gray-700 hover:bg-green-50 hover:scale-105'                   
+            }`}                 
+          >                   
+            <cat.icon size={17} />                   
+            {cat.fullName}                 
+          </button>               
+        ))}             
+      </div>           
+    </div>         
+  </div>       
 </section>
 
       {/* ── Products Main ── */}
